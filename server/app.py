@@ -13,10 +13,9 @@ from models import db, Production, CastMember, User
 # In Terminal, run:
 # `honcho start -f Procfile.dev`
 
-from flask import Flask, request, make_response, session, jsonify, abort
-from flask_migrate import Migrate
+from flask import request, make_response, session, abort, render_template
 from flask_restful import Resource
-from werkzeug.exceptions import NotFound, Unauthorized
+from werkzeug.exceptions import NotFound
 from flask_cors import CORS
 from config import app, db, api
 
@@ -29,6 +28,12 @@ from config import app, db, api
 
 
 CORS(app)
+
+
+@app.route('/')
+@app.route('/<int:id>')
+def index(id=0):
+    return render_template("index.html")
 
 
 class Productions(Resource):
